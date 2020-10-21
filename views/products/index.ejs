@@ -1,0 +1,36 @@
+<% include ../partials/header %>
+
+<div class="ui main text container">
+    <div class="ui huge header">goPharmacy</div>
+    <div class="ui top  attached segment">
+        <div class="ui divided items">
+            <% products.forEach(function(product){ %>
+                <div class="item">
+                    <div class="image">
+                        <img src="<%= product.image %>" >
+                    </div>
+                    <div class="content">
+                         <a class="header" href="/products/<%= product._id %>"><%= product.title %></a>
+                         <div class="meta">
+                             <span><%= product.created.toDateString() %></span>
+                         </div>
+                         <div class="description">
+                             <p><%= product.desc %></p>
+                             <a class="header" href="/products/<%= product._id %>"><%= product.price %></a>
+                         </div>
+                         <div class="extra">
+                             <a class="ui floated basic violet button" href="/products/<%= product._id %>">
+                                 Read More
+                                 <i class="right chevron icon"></i>
+                             </a>
+                         </div>
+                    </div>
+                </div>
+            <% }) %>
+        </div>
+        <a href="./products/new" class="ui violet big basic button">Add New Product</a>
+    </div>
+</div>
+
+
+<% include ../partials/footer %>
