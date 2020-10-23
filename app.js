@@ -8,6 +8,7 @@ Product           = require("./models/product"),
 mongoose          = require("mongoose"),
 express           = require("express"),
 LocalStrategy     = require("passport-local"),
+path              = require("path"),
 app               = express();
 
 
@@ -19,8 +20,18 @@ var productRoutes    = require("./routes/products"),
 mongoose.connect("mongodb://localhost/gopharmacy",
   { useNewUrlParser: true });
 
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function() {
+  console.log("Database is connected");
+});
+
 app.set("view engine", "ejs");
 app.use(express.static("public"));
+app.use("/css", express.static(path.join(__dirname, "/node_modules/bootstrap/dist/css")));
+app.use("/css", express.static(path.join(__dirname, "/node_modules/font-awesome/css")));
+app.use("/js", express.static(path.join(__dirname, "/node_modules/jquery/dist")));
+app.use("/js", express.static(path.join(__dirname, "/node_modules/bootstrap/dist/js")));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(expressSanitizer());
 app.use(methodOverride("_method"));
@@ -57,7 +68,7 @@ app.use(function(req, res, next){
 app.use("/", indexRoutes);
 app.use("/products", productRoutes);
 
-var port = process.env.PORT || 3000;
+var port = process.env.PORT || 4000;
 app.listen(port, () => {
   console.log(`App running on port: ${port}`);
 });
