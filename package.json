@@ -1,5 +1,5 @@
 {
-  "name": "RESTfulBlogApp",
+  "name": "goPharmacy",
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
@@ -35,5 +35,8 @@
       "NODE_ENV": "development",
       "PORT": 3000
     }
+  },
+  "engines": {
+    "node": "13.12.0"
   }
 }
